@@ -1,16 +1,50 @@
 {
-    "name": "study-switch",
+    "name": " StudySwitch",
     "version": "1.0.0",
     "description": "スイッチを押すと勉強する",
     "main": "src/main.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "NODE_ENV=development electron .",
+        "pack": "electron-packager ./ StudySwitch --platform=darwin --arch=x64 --out=packages --overwrite --asar.unpackDir='script' --icon='./assets/mac/icon_mac.icns'",
+        "build": "electron-builder --mac --x64"
     },
     "keywords": [],
     "author": "Hiroaki MIZUNO(shiki.49.313@gmail.com)",
     "license": "ISC",
     "devDependencies": {
         "electron": "^9.0.0",
-        "electron-builder": "^22.7.0"
+        "electron-builder": "^22.7.0",
+        "electron-packager": "^14.2.1"
+    },
+    "build": {
+        "appId": "com.electron.studyswitch",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "assets",
+            "src",
+            "package.json",
+            "package-lock.json"
+        ],
+        "mac": {
+            "icon": "assets/mac/icon_mac.icns",
+            "target": [
+                "dmg"
+            ],
+            "asarUnpack": "src/"
+        },
+        "win": {
+            "icon": "assets/win/icon_win.ico",
+            "target": "nsis"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true
+        }
+    },
+    "dependencies": {
+        "electron-log": "^4.2.0"
     }
 }

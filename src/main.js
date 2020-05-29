@@ -4,6 +4,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { exec } = require('child_process')
 const electron = require('electron');
+const fs = require('fs')
+const log = require('electron-log');
 
 // メインウィンドウはGCされないようにグローバル宣言
 let mainWindow;
@@ -46,12 +48,15 @@ app.on('activate', () => {
 //レンダラープロセスから送られたdataの内容がargに格納されている
 ipcMain.on("click", (event, arg) => {
     //処理
-    exec('osascript -l JavaScript ' + __dirname + '/script.js', (err, stdout, stderr) => {
+    //@TODO プロダクトとデベロップで分ける
+    var pluginDir = __dirname.replace('app.asar', 'app.asar.unpacked') + "/script.js";
+    //log.error(pluginDir)
+    exec('/usr/bin/osascript -l JavaScript ' + pluginDir, (err, stdout, stderr) => {
         if (err) {
-            console.log(`stderr: ${stderr}`)
+            log.error(`stderr: ${stderr}`)
             return
         }
-        console.log(`stdout: ${stdout}`)
+        //console.log(`stdout: ${stdout}`)
     }
     )
 });
