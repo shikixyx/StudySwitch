@@ -1,0 +1,16 @@
+{
+    "name": "study-switch",
+    "version": "1.0.0",
+    "description": "スイッチを押すと勉強する",
+    "main": "src/main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Hiroaki MIZUNO(shiki.49.313@gmail.com)",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^9.0.0",
+        "electron-builder": "^22.7.0"
+    }
+}
